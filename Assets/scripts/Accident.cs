@@ -2,14 +2,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour
+public class Accident : MonoBehaviour
 {
     public GameObject crashUI; // Assign in Inspector
     public Button hitAndRunButton; // Assign the Hit & Run button in Inspector
     public Button restartButton; // Assign the Restart button in Inspector
-    public GameObject[] policeCars; // Array of police cars to spawn
-    public Transform[] policeSpawnPoints; // Spawn points for police cars (optional)
-    public float policeSpawnDelay = 1f; // Delay between spawning each police car
+    public GameObject[] policeCars; // Array of police cars to activate
+    public float policeSpawnDelay = 1f; // Delay between activating each police car
     private bool isCrashed = false;
 
     void Start()
@@ -61,37 +60,30 @@ public class GameController : MonoBehaviour
             restartButton.interactable = false;
 
         // Activate and start multiple police cars chase
-        StartCoroutine(SpawnPoliceCars());
+        StartCoroutine(ActivatePoliceCars());
         
-        Debug.Log("Hit and Run activated! Multiple police cars are chasing!");
+        Debug.Log("police cars are coming!");
     }
 
-    System.Collections.IEnumerator SpawnPoliceCars()
+    System.Collections.IEnumerator ActivatePoliceCars()
     {
         for (int i = 0; i < policeCars.Length; i++)
         {
             if (policeCars[i] != null)
             {
-                // Set spawn position if spawn points are provided
-                if (policeSpawnPoints != null && i < policeSpawnPoints.Length && policeSpawnPoints[i] != null)
-                {
-                    policeCars[i].transform.position = policeSpawnPoints[i].position;
-                    policeCars[i].transform.rotation = policeSpawnPoints[i].rotation;
-                }
-
-                // Activate the police car
+                // Activate the police car at its current position
                 policeCars[i].SetActive(true);
 
                 // Start chase if Police component exists
                 Police policeScript = policeCars[i].GetComponent<Police>();
                 if (policeScript != null)
                 {
-                    policeScript.StartChase(transform);
+                    policeScript.TriggerChase();
                 }
 
                 Debug.Log($"Police car {i + 1} activated and chasing!");
 
-                // Wait before spawning the next police car
+                // Wait before activating the next police car
                 yield return new WaitForSeconds(policeSpawnDelay);
             }
         }

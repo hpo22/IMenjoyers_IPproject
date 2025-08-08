@@ -1,61 +1,111 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Police : MonoBehaviour
 {
-    public NavMeshAgent agent;
-    private Transform player;
-    private GameOver gameOverScript;
+   public enum State { Patrol, Idle, Chase }
+    private State currentState;
 
-    void Start()
+    public Transform[] patrolPoints;
+    public Transform player;
+    public float patrolSpeed = 5f;
+    public float chaseSpeed = 10f;
+    public float idleTime = 2f;
+    public float catchDistance = 3f;
+    public GameObject gameOverUI; // Assign in Inspector
+
+    private NavMeshAgent agent;
+    private int patrolIndex = 0;
+    private bool chaseTriggered = false;
+
+    private void Start()
     {
-        // Find the GameOver script in the scene
-        gameOverScript = FindFirstObjectByType<GameOver>();
-        if (gameOverScript == null)
+        agent = GetComponent<NavMeshAgent>();
+        currentState = State.Patrol;
+        if (gameOverUI != null) gameOverUI.SetActive(false);
+        StartCoroutine(FSM());
+    }
+
+    private IEnumerator FSM()
+    {
+        while (true)
         {
-            Debug.LogError("GameOver script not found in scene! Make sure there's a GameObject with GameOver script.");
+            if (currentState == State.Patrol)
+            {
+                Patrol();
+            }
+            else if (currentState == State.Idle)
+            {
+                yield return StartCoroutine(Idle());
+            }
+            else if (currentState == State.Chase)
+            {
+                Chase();
+            }
+            yield return null;
         }
     }
 
-    public void StartChase(Transform playerTarget)
+    private void Patrol()
     {
-        player = playerTarget;
-        Debug.Log($"Police car {gameObject.name} started chasing the player!");
+        if (!chaseTriggered) // Prevent accidental chase start
+        {
+            agent.speed = patrolSpeed;
+            if (patrolPoints.Length == 0) return;
+
+            agent.SetDestination(patrolPoints[patrolIndex].position);
+
+            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            {
+                patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
+                currentState = State.Idle;
+            }
+        }
     }
 
-    void Update()
+    private IEnumerator Idle()
     {
-        if (player != null && agent != null)
+        agent.ResetPath();
+        yield return new WaitForSeconds(idleTime);
+        currentState = State.Patrol;
+    }
+
+    public void Chase()
+    {
+        if (player != null)
         {
+            agent.speed = chaseSpeed;
             agent.SetDestination(player.position);
+
+            if (Vector3.Distance(transform.position, player.position) <= catchDistance)
+            {
+                ShowGameOver();
+            }
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void TriggerChase()
     {
-        // Check if the police car collided with the player
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Police caught the player!");
-            
-            // Stop the game and show game over
-            if (gameOverScript != null)
-            {
-                gameOverScript.ShowGameOver();
-            }
-            else
-            {
-                Debug.LogError("GameOver script reference is null!");
-            }
-            
-            // Stop this police car from moving
-            if (agent != null)
-            {
-                agent.isStopped = true;
-                agent.velocity = Vector3.zero;
-            }
-        }
+        chaseTriggered = true;
+        currentState = State.Chase;
     }
 
-    
+    public void StopChase()
+    {
+        chaseTriggered = false;
+        currentState = State.Patrol;
+    }
+
+    private void ShowGameOver()
+    {
+        Debug.Log("GAME OVER - Police caught the player!");
+        Time.timeScale = 0;
+        if (gameOverUI != null)
+        {
+            gameOverUI.SetActive(true);
+        }
+
+    }
+
 }
