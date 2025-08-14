@@ -1,3 +1,5 @@
+// MYAT MON THU
+
 using UnityEngine;
 
 public class TrafficLightCombined : MonoBehaviour

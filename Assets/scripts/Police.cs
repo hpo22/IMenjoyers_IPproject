@@ -1,23 +1,25 @@
+//HTET PAING OO
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Police : MonoBehaviour
 {
-   public enum State { Patrol, Idle, Chase }
+    public enum State { Patrol, Idle, Chase }
     private State currentState;
 
-    public Transform[] patrolPoints;
+    public Transform[] patrolPoints; // array of points for the police to patrol betwen
     public Transform player;
     public float patrolSpeed = 5f;
     public float chaseSpeed = 10f;
     public float idleTime = 2f;
-    public float catchDistance = 3f;
+    public float catchDistance = 3f; // distance that police can catch the player
     public GameObject gameOverUI; // Assign in Inspector
 
     private NavMeshAgent agent;
     private int patrolIndex = 0;
-    private bool chaseTriggered = false;
+    private bool chaseTriggered = false; // not to chase the player first
 
     private void Start()
     {
@@ -54,9 +56,9 @@ public class Police : MonoBehaviour
             agent.speed = patrolSpeed;
             if (patrolPoints.Length == 0) return;
 
-            agent.SetDestination(patrolPoints[patrolIndex].position);
+            agent.SetDestination(patrolPoints[patrolIndex].position); // police position is patrol point index position
 
-            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            if (!agent.pathPending && agent.remainingDistance < 0.5f) // when police reach patrol point
             {
                 patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
                 currentState = State.Idle;
@@ -66,8 +68,8 @@ public class Police : MonoBehaviour
 
     private IEnumerator Idle()
     {
-        agent.ResetPath();
-        yield return new WaitForSeconds(idleTime);
+        agent.ResetPath(); // stop police 
+        yield return new WaitForSeconds(idleTime); // wait for idle time 
         currentState = State.Patrol;
     }
 
@@ -76,9 +78,9 @@ public class Police : MonoBehaviour
         if (player != null)
         {
             agent.speed = chaseSpeed;
-            agent.SetDestination(player.position);
+            agent.SetDestination(player.position); // police position is player position
 
-            if (Vector3.Distance(transform.position, player.position) <= catchDistance)
+            if (Vector3.Distance(transform.position, player.position) <= catchDistance) // if police position to player position is less than catchDistance show gameover
             {
                 ShowGameOver();
             }
@@ -100,7 +102,7 @@ public class Police : MonoBehaviour
     private void ShowGameOver()
     {
         Debug.Log("GAME OVER - Police caught the player!");
-        Time.timeScale = 0;
+        Time.timeScale = 0; // stop the game 
         if (gameOverUI != null)
         {
             gameOverUI.SetActive(true);

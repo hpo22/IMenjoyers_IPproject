@@ -1,10 +1,12 @@
+//HTET PAING OO
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    public GameObject gameOverUI; // Assign the Game Over UI panel
+    public GameObject gameOverUI; // assign the Game Over UI panel
 
 
 
