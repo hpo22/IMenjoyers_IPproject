@@ -6,29 +6,57 @@ using System.Collections;
 
 public class TrafficLight : MonoBehaviour
 {
-    public GameObject warningUI; // Assign your UI sign here
-    public TMP_Text distanceText; // The text that shows the distance
-    public Transform trafficLight; // Reference to traffic light position
-    public float deactivateDistance = 5f; // Hide UI when this close to traffic light
+    enum State { Idle, Warning, Close }
+    private State currentState = State.Idle;
+
+    public GameObject warningUI;      
+    public TMP_Text distanceText;     
+    public Transform trafficLight;    
+    public float deactivateDistance = 5f; 
 
     private Transform player;
-    private bool isPlayerInZone = false;
 
-    
+    void Update()
+    {
+        switch (currentState)
+        {
+            case State.Idle:
+                // Do nothing unless player enters trigger
+                break;
+
+            case State.Warning:
+                if (player != null && trafficLight != null)
+                {
+                    float distance = Vector3.Distance(player.position, trafficLight.position);
+
+                    
+                    if (distanceText != null)
+                        distanceText.text = $"Traffic Light Ahead – {Mathf.Round(distance)}m";
+
+                    // if player is close enough → Close state
+                    if (distance <= deactivateDistance)
+                    {
+                        currentState = State.Close;
+                        Debug.Log("Player reached traffic light");
+                        SetUI(false);
+                    }
+                }
+                break;
+
+            case State.Close:
+                
+                break;
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player"))
         {
             player = other.transform;
-            isPlayerInZone = true;
-            
-            if (warningUI != null)
-            {
-                warningUI.SetActive(true);
-                Debug.Log("Warning UI activated - Player entered zone");
-            }
+            currentState = State.Warning;
+            Debug.Log("Player entered zone");
+            SetUI(true);
         }
     }
 
@@ -36,40 +64,16 @@ public class TrafficLight : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInZone = false;
-            if (warningUI != null)
-            {
-                warningUI.SetActive(false);
-                Debug.Log("Warning UI deactivated - Player exited zone");
-            }
             player = null;
+            currentState = State.Idle;
+            Debug.Log("Player exited zone");
+            SetUI(false);
         }
     }
 
-    void Update()
+    void SetUI(bool active)
     {
-        if (isPlayerInZone && player != null && trafficLight != null)
-        {
-            float distance = Vector3.Distance(player.position, trafficLight.position);
-
-            
-            // Update distance text 
-            if (distanceText != null)
-            {
-                distanceText.text = $" Traffic Light Ahead – {Mathf.Round(distance)}m";
-            }
-
-            // Hide UI when close to traffic light
-            if (distance <= deactivateDistance)
-            {
-                if (warningUI != null)
-                {
-                    warningUI.SetActive(false);
-                    Debug.Log("Warning UI hidden - Player reached traffic light");
-                }
-                isPlayerInZone = false;
-                player = null;
-            }
-        }
+        if (warningUI != null)
+            warningUI.SetActive(active);
     }
 }

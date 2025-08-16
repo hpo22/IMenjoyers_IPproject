@@ -11395,7 +11395,7 @@ Transform:
   m_GameObject: {fileID: 318053963}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 366}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11416,7 +11416,7 @@ MonoBehaviour:
   warningUI: {fileID: 1128989666}
   distanceText: {fileID: 1303884281}
   trafficLight: {fileID: 714753120}
-  deactivateDistance: 5
+  deactivateDistance: 23
 --- !u!65 &318053966
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11436,7 +11436,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 190, y: 18, z: 120}
+  m_Size: {x: 190, y: 18, z: 750}
   m_Center: {x: 115.7, y: 0, z: 26.56}
 --- !u!1001 &318672807
 PrefabInstance:
@@ -11595,7 +11595,7 @@ Transform:
   m_GameObject: {fileID: 318730545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11616,7 +11616,7 @@ MonoBehaviour:
   warningUI: {fileID: 1128989666}
   distanceText: {fileID: 1303884281}
   trafficLight: {fileID: 1168107581}
-  deactivateDistance: 5
+  deactivateDistance: 25
 --- !u!65 &318730548
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11636,7 +11636,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 182.5, y: 18, z: 120}
+  m_Size: {x: 182.5, y: 18, z: 750}
   m_Center: {x: 106.41, y: 0, z: 22}
 --- !u!1001 &325080435
 PrefabInstance:
@@ -14636,7 +14636,7 @@ Transform:
   m_GameObject: {fileID: 419405872}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 334}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14657,7 +14657,7 @@ MonoBehaviour:
   warningUI: {fileID: 1128989666}
   distanceText: {fileID: 1303884281}
   trafficLight: {fileID: 714753120}
-  deactivateDistance: 5
+  deactivateDistance: 25
 --- !u!65 &419405875
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14677,7 +14677,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 190, y: 18, z: 120}
+  m_Size: {x: 190, y: 18, z: 700}
   m_Center: {x: 115.7, y: 0, z: 26.56}
 --- !u!1001 &419862486
 PrefabInstance:
@@ -28259,7 +28259,7 @@ MonoBehaviour:
   warningUI: {fileID: 1128989666}
   distanceText: {fileID: 1303884281}
   trafficLight: {fileID: 567140309}
-  deactivateDistance: 5
+  deactivateDistance: 25
 --- !u!65 &737769376
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28279,7 +28279,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 61.9, y: 18.08, z: 69.6}
+  m_Size: {x: 61.9, y: 18.08, z: 250}
   m_Center: {x: 67.61, y: 0, z: 182.4}
 --- !u!4 &737769377
 Transform:
@@ -28290,7 +28290,7 @@ Transform:
   m_GameObject: {fileID: 737769374}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -128.28958, y: 10.360125, z: -498.7689}
+  m_LocalPosition: {x: -128.28958, y: 10.360125, z: -178}
   m_LocalScale: {x: 3.6753786, y: 2.2767267, z: 3.1500149}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53632,7 +53632,7 @@ Transform:
   m_GameObject: {fileID: 1349055096}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -513}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53653,7 +53653,7 @@ MonoBehaviour:
   warningUI: {fileID: 1128989666}
   distanceText: {fileID: 1303884281}
   trafficLight: {fileID: 714753120}
-  deactivateDistance: 5
+  deactivateDistance: 25
 --- !u!65 &1349055099
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53673,7 +53673,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 190, y: 18, z: 120}
+  m_Size: {x: 190, y: 18, z: 900}
   m_Center: {x: 115.7, y: 0, z: 26.56}
 --- !u!1001 &1350387388
 PrefabInstance:
@@ -81070,7 +81070,7 @@ Transform:
   m_GameObject: {fileID: 2060910855}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81091,7 +81091,7 @@ MonoBehaviour:
   warningUI: {fileID: 1128989666}
   distanceText: {fileID: 1303884281}
   trafficLight: {fileID: 714753120}
-  deactivateDistance: 5
+  deactivateDistance: 25
 --- !u!65 &2060910858
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -81111,7 +81111,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 190, y: 18, z: 120}
+  m_Size: {x: 190, y: 18, z: 1100}
   m_Center: {x: 115.7, y: 0, z: 26.56}
 --- !u!1001 &2061270523
 PrefabInstance:
@@ -81907,7 +81907,7 @@ Transform:
   m_GameObject: {fileID: 2086065214}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 299}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81928,7 +81928,7 @@ MonoBehaviour:
   warningUI: {fileID: 1128989666}
   distanceText: {fileID: 1303884281}
   trafficLight: {fileID: 207907366}
-  deactivateDistance: 5
+  deactivateDistance: 25
 --- !u!65 &2086065217
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -81948,7 +81948,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 190, y: 18, z: 120}
+  m_Size: {x: 190, y: 18, z: 700}
   m_Center: {x: 112.05, y: 0, z: 52.94}
 --- !u!1001 &2090798451
 PrefabInstance:
